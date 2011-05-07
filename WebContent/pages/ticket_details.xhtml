@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi"
+      xmlns:rs="http://java.sun.com/jsf/composite/select">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Ticket Details</ui:define>
+		<ui:define name="headerLinks">
+			<table>
+				<tr>
+					<td>
+						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/problem_creation.jsf"
+									rendered="#{ticketDetailsPage.readonly}">
+				    			<h:outputText value="#{msg_tickets.add_problem}" />
+				    			<f:param name="ticketID" value="#{ticketDetailsPage.ticketID}"/>
+			    			</h:outputLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+						<h:commandLink value="#{msg_tickets.edit}" action="#{ticketDetailsPage.editTicketAction}" 
+								rendered="#{!loginBean.isUserInRole('user') and ticketDetailsPage.readonly}" >
+						</h:commandLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+						<h:commandLink value="#{msg_tickets.delete}" action="#{ticketDetailsPage.deleteTicketAction}" 
+								rendered="#{!loginBean.isUserInRole('user')}" >
+							<f:param name="ticketID" value="#{ticketDetailsPage.ticketID}"/>
+						</h:commandLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+						<h:commandLink value="#{msg_tickets.back}" action="#{ticketDetailsPage.viewTicketAction}" 
+							rendered="#{!ticketDetailsPage.readonly}" >
+						</h:commandLink>
+						</h:form>
+					</td>
+				</tr>
+			</table>
+		</ui:define>
+		<ui:define name="pageBody">
+				<h:form>
+					<h:panelGrid class="generic" columns="5">
+				    	<h:outputText value="#{msg_tickets.ticket_id}" />
+				    	<h:outputText value="#{msg_tickets.ticket_description}" />
+				    	<h:outputText value="#{msg_tickets.ticket_created}" />
+				    	<h:outputText value="#{msg_tickets.ticket_assigned_to}" />
+				    	<h:outputText value="#{msg_tickets.ticket_status}" />
+				    	
+				    	<h:outputText value="#{ticketDetailsPage.ticket.id}" />
+				    	<h:inputText 
+				    			readonly="#{ticketDetailsPage.readonly}" 
+				    			value="#{ticketDetailsPage.ticketDescription}" />
+				    	<h:outputText value="#{ticketDetailsPage.ticket.ticketDate}" >
+				    		<f:convertDateTime type="both" />
+				    	</h:outputText>
+				    	
+				    	<h:selectOneMenu
+			    				disabled="#{ticketDetailsPage.readonly}"
+			    				value="#{ticketDetailsPage.assignedToUserID}">
+		    				<f:selectItems value="#{ticketDetailsPage.allUsers}"/>
+    					</h:selectOneMenu>
+				    	
+				    	<h:selectOneMenu
+			    				disabled="#{ticketDetailsPage.readonly}"
+			    				value="#{ticketDetailsPage.ticketStatus}">
+		    				<f:selectItem itemValue="1" itemLabel="#{msg_tickets.status_open}" />
+		    				<f:selectItem itemValue="2" itemLabel="#{msg_tickets.status_in_progress}" />
+		    				<f:selectItem itemValue="3" itemLabel="#{msg_tickets.status_verified}" />
+		    				<f:selectItem itemValue="4" itemLabel="#{msg_tickets.status_closed}" />
+		    				<f:selectItem itemValue="5" itemLabel="#{msg_tickets.status_reopened}" />
+    					</h:selectOneMenu>
+    					
+			    	</h:panelGrid>
+			    	<div align="left">
+				    	<h:commandButton type="submit" value="#{msg_tickets.submit}" binding="#{ticketDetailsPage.submitButton}"
+				    				action="#{ticketDetailsPage.saveTicketAction}" >
+				    	</h:commandButton>
+			    	</div>
+			    	<br/>
+			    	<h:messages />
+			    	
+			    	<br />
+			    	<h:dataTable class="generic" value="#{ticketDetailsPage.problems}" var="p">
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_tickets.problem_name}" />
+			    			</f:facet>
+			    			<h:outputLink value="#{request.contextPath}/pages/problem_details.jsf"
+									rendered="#{ticketDetailsPage.readonly}">
+				    			<h:outputText value="#{p.name}" />
+				    			<f:param name="problemID" value="#{p.id}"/>
+			    			</h:outputLink>
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_tickets.problem_description}" />
+			    			</f:facet>
+			    			<h:outputText value="#{p.description}" />
+			    		</h:column>
+			    	</h:dataTable>
+		    	</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

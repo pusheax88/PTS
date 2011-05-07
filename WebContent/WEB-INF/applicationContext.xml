@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<!-- the parent application context definition for the pts application -->
+
+	<!--<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages"/>
+	</bean>-->
+
+	<!-- Bean declared with JSF annotation 
+	<bean id="ticketManager" class="pts.ticket.util.SimpleTicketManager">
+		<property name="ticketDAO" ref="ticketDAO" />
+	</bean>-->
+
+	<!--<bean id="ticketDAO" class="pts.dao.ticket.JDBCTicketDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean> -->
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<!-- <property name="mappingResources">
+            <list>
+				<value>pts.hbm.xml</value>
+            </list>
+        </property>  -->
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>pts.model.**.*</value>
+			</list>
+		</property>
+		<!-- <property name="annotatedClasses">
+			<list>
+				<value>pts.model.network.Device</value>
+				<value>pts.model.network.Location</value>
+				<value>pts.model.network.Network</value>
+				<value>pts.model.network.NetworkElement</value>
+				<value>pts.model.network.properties.ElementProperty</value>
+				<value>pts.model.network.properties.SnmpProperty</value>
+				<value>pts.model.network.transport.ConnectionPoint</value>
+				<value>pts.model.network.transport.Interface</value>
+				
+				<value>pts.model.ticket.Action</value>
+				<value>pts.model.ticket.Problem</value>
+				<value>pts.model.ticket.Ticket</value>
+				<value>pts.model.ticket.TicketStatus</value>
+				
+				<value>pts.model.user.User</value>
+				<value>pts.model.user.Role</value>
+			</list>
+		</property>  -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<aop:config>
+		<aop:advisor pointcut="execution(* *..TicketManager.*(..))"
+			advice-ref="txAdvice" />
+		<aop:advisor pointcut="execution(* *..ProblemManager.*(..))"
+			advice-ref="txAdvice" />
+		<aop:advisor pointcut="execution(* *..ActionManager.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+
+	<tx:advice id="txAdvice">
+		<tx:attributes>
+			<tx:method name="save*" />
+			<tx:method name="add*" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+</beans>

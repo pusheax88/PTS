@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{localeBean.language}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ez="http://java.sun.com/jsf/composite/navi">
+<f:view locale="#{localeBean.language}">
+<h:head>
+	<title><ui:insert name="pageTitle">PTS</ui:insert></title>
+	<link rel="StyleSheet" href="../resources/style.css" type="text/css" media="screen" />
+</h:head>
+
+<h:body>
+
+	<div class="header">
+		<table width="100%">
+			<tr>
+				<td width="60%" align="right"><ui:insert name="pageHeader">#{msg.pts}</ui:insert></td>
+				<td width="30%" align="right">#{msg.logged_in_as} #{loginBean.user.name}</td>
+				<td width="10%" align="right">
+					<ez:command_link value="#{msg.logout}" action="#{loginBean.logout}" />
+				</td>
+				<td width="10%" align="right">
+					<h:form>
+            			<h:selectOneMenu value="#{localeBean.language}" onchange="submit()">
+                			<f:selectItem itemValue="ru" itemLabel="Русский" />
+               	 			<f:selectItem itemValue="en" itemLabel="English" />
+            			</h:selectOneMenu>
+        			</h:form>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="links" align="right" >
+			<ui:insert name="headerLinks"></ui:insert>
+	</div>
+
+	<table class="content" align="center" cellpadding="1" cellspacing="0"
+		width="80%" height="80%">
+		<tr>
+			<td width="15%" align="center" valign="top">
+				<h:outputLink value="#{request.contextPath}/pages/tickets.jsf">
+					${msg.menu_tickets}<br/>
+				</h:outputLink>
+				<h:outputLink value="#{request.contextPath}/pages/network_elements.jsf" 
+						rendered="#{!loginBean.isUserInRole('user')}">
+					${msg.menu_network_elements}<br/>
+				</h:outputLink>
+				<h:outputLink value="#{request.contextPath}/pages/help.jsf">
+					${msg.menu_help}<br/>
+				</h:outputLink>
+				<h:outputLink value="#{request.contextPath}/pages/about.jsf">
+					${msg.menu_about}<br/>
+				</h:outputLink>
+			</td>
+			<td class="delimiter" width="1" ></td>
+			<td width="85%">
+				<div id="page-content">
+					<ui:insert name="pageBody">pageBody</ui:insert>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<div class="footer" 
+		style="border:0px solid #CAD6E0; height:80%; color:#E4EBEB"  
+		align="center">
+			<ui:insert name="pageFooter"></ui:insert>
+	</div>
+	
+</h:body>
+</f:view>		
+</html>

@@ -1,0 +1,121 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi"
+      xmlns:rs="http://java.sun.com/jsf/composite/select">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Problem Details</ui:define>
+		<ui:define name="headerLinks">
+			<table>
+				<tr>
+					<td>
+						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/action_creation.jsf"
+									rendered="#{!loginBean.isUserInRole('user') and problemDetailsPage.readonly}">
+				    			<h:outputText value="#{msg_problems.add_action}" />
+				    			<f:param name="problemID" value="#{problemDetailsPage.problem.id}"/>
+			    			</h:outputLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+						<h:commandLink value="#{msg_problems.edit}" action="#{problemDetailsPage.editProblemAction}" 
+								rendered="#{!loginBean.isUserInRole('user') and problemDetailsPage.readonly}" >
+						</h:commandLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+						<h:commandLink value="#{msg_problems.delete}" action="#{problemDetailsPage.deleteProblemAction}" 
+									rendered="#{!loginBean.isUserInRole('user')}" >
+								<f:param name="problemID" value="#{problemDetailsPage.problem.id}"/>
+						</h:commandLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandLink value="#{msg_problems.back}" action="#{problemDetailsPage.viewProblemAction}" 
+								rendered="#{!problemDetailsPage.readonly}" >
+							</h:commandLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/ticket_details.jsf" >
+								<h:outputText value="#{msg_problems.return_to_ticket}" />
+								<f:param name="ticketID" value="#{problemDetailsPage.ticketID}"/>
+							</h:outputLink>
+						</h:form>
+					</td>
+				</tr>
+			</table>
+		</ui:define>
+		<ui:define name="pageBody">
+				<h:form>
+					<h:panelGrid class="generic" columns="5">
+				    	<h:outputText value="#{msg_problems.problem_id}" />
+				    	<h:outputText value="#{msg_problems.problem_name}" />
+				    	<h:outputText value="#{msg_problems.problem_description}" />
+				    	<h:outputText value="#{msg_problems.problem_from_date}" />
+				    	<h:outputText value="#{msg_problems.problem_to_date}" />
+				    	
+				    	<h:outputText value="#{problemDetailsPage.problem.id}" />
+				    	<h:outputText value="#{problemDetailsPage.problem.name}" />
+				    	<h:inputText 
+				    			readonly="#{problemDetailsPage.readonly}" 
+				    			value="#{problemDetailsPage.problemDescription}" />
+				    	<h:outputText value="#{problemDetailsPage.problem.fromDate}" >
+				    		<f:convertDateTime type="both"/>
+				    	</h:outputText>
+				    	<h:outputText value="#{problemDetailsPage.problem.toDate}" >
+				    		<f:convertDateTime type="both"/>
+				    	</h:outputText>
+			    	</h:panelGrid>
+			    	<div align="left">
+				    	<h:commandButton type="submit" value="#{msg_problems.submit}" binding="#{problemDetailsPage.submitButton}"
+				    				action="#{problemDetailsPage.saveProblemAction}" >
+				    	</h:commandButton>
+				    </div>
+				    <br/>
+			    	<h:messages />
+			    	
+			    	<br />
+			    	<h:dataTable class="generic" value="#{problemDetailsPage.problem.actions}" var="a">
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_problems.action}" />
+			    			</f:facet>
+			    			<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/action_details.jsf">
+				    			<h:outputText value="#{a.id}" />
+				    			<f:param name="actionID" value="#{a.id}"/>
+			    			</h:outputLink>
+						</h:form>
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_problems.action_description}" />
+			    			</f:facet>
+			    			<h:outputText value="#{a.description}" />
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_problems.action_date}" />
+			    			</f:facet>
+			    			<h:outputText value="#{a.actionDate}" >
+			    				<f:convertDateTime type="both" />
+			    			</h:outputText>
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_problems.action_actor}" />
+			    			</f:facet>
+			    			<h:outputText value="#{a.actor.name}" />
+			    		</h:column>
+			    	</h:dataTable>
+		    	</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

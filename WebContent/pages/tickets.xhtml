@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Ticket Viewer</ui:define>
+		<ui:define name="headerLinks">
+		<h:form>
+			<h:outputLink
+					value="#{request.contextPath}/pages/ticket_creation.jsf">
+				<h:outputText value="#{msg_tickets.create_ticket}" />
+			</h:outputLink>
+		</h:form>
+		</ui:define>
+		<ui:define name="pageBody">
+			<h:dataTable class="generic" id='tickets_table' value="#{ticketManager.tickets}" var="t">
+		    	<h:column>
+		    		<f:facet name="header">
+		    			<h:outputText value="#{msg_tickets.ticket_name}" />
+		    		</f:facet>
+		    		<h:form>
+			    		<h:outputLink value="#{request.contextPath}/pages/ticket_details.jsf">
+			    			<h:outputText value="#{t.name}" />
+			    			<f:param name="ticketID" value="#{t.id}" />
+			    		</h:outputLink>
+		    		</h:form>
+		    	</h:column>
+		    	<h:column>
+		    		<f:facet name="header">
+		    			<h:outputText value="#{msg_tickets.ticket_description}" />
+		    		</f:facet>
+		    		<h:outputText value="#{t.description}" />
+		    	</h:column>
+		    	<h:column>
+		    		<f:facet name="header">
+		    			<h:outputText value="#{msg_tickets.ticket_created}" />
+		    		</f:facet>
+		    		<h:outputText value="#{t.ticketDate}" >
+		    			<f:convertDateTime type="both" />
+		    		</h:outputText>
+		    	</h:column>
+		    	<h:column>
+		    		<f:facet name="header">
+		    			<h:outputText value="#{msg_tickets.ticket_assigned_to}" />
+		    		</f:facet>
+		    		<h:outputText value="#{t.assignedTo.name}" />
+		    	</h:column>
+		    	<h:column>
+		    		<f:facet name="header">
+		    			<h:outputText value="#{msg_tickets.ticket_status}" />
+		    		</f:facet>
+		    		<h:outputText value="#{t.status.statusName}" />
+		    	</h:column>
+	    	</h:dataTable>
+		</ui:define>
+	</ui:composition>
+</html>

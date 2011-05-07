@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Create new Action</ui:define>
+		<ui:define name="headerLinks">
+			<table>
+				<tr>
+					<td>
+						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/problem_details.jsf" >
+								<h:outputText value="#{msg_actions.back}" />
+								<f:param name="problemID" value="#{actionCreationPage.problemID}"/>
+							</h:outputLink>
+						</h:form>
+					</td>
+				</tr>
+			</table>
+		</ui:define>
+		<ui:define name="pageBody">
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg_actions.action_description}" />
+			    	<h:inputTextarea value="#{actionCreationPage.actionDescription}" />
+		    	</h:panelGrid>
+		    	<h:commandButton action="#{actionCreationPage.submitActionAction}" value="#{msg_actions.submit}" >
+		    		<f:param name="problemID" value="#{actionCreationPage.problemID}" />
+		    	</h:commandButton>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+	version="2.0">
+
+	<!-- <package>pts.model.network</package>  -->
+	<entity class="pts.model.network.NetworkElement">
+		<attributes>
+			<id name="id">
+	            <column name="NETWORK_ELEMENT_ID"/>
+	            <generated-value />
+        	</id>
+		</attributes>
+	</entity>
+	
+	<entity class="pts.model.network.Network" >
+		<attributes>
+			<id name="id">
+	            <column name="network_id"/>
+	            <generated-value />
+        	</id>
+        	<one-to-many name="networkElements" fetch="EAGER">
+	            <join-table name="NETWORK_TO_NETWORK_ELEMENT">
+	                <join-column name="NETWORK_ID"/>
+	                <inverse-join-column name="NETWORK_ELEMENT_ID"/>
+            	</join-table>
+            	<cascade>
+            		<cascade-all />
+            	</cascade>
+        	</one-to-many>
+		</attributes>
+	</entity>
+	
+	<entity class="pts.model.network.Location">
+		<attributes>
+			<id name="id">
+	            <column name="location_id"/>
+	            <generated-value />
+        	</id>
+		</attributes>
+	</entity>
+	
+	<entity class="pts.model.network.properties.SnmpProperty">
+		<attributes>
+			<id name="id">
+	            <column name="property_id"/>
+	            <generated-value />
+        	</id>
+		</attributes>
+	</entity>
+	
+	<entity class="pts.model.network.transport.ConnectionPoint">
+		<attributes>
+			<id name="id">
+	            <column name="connection_point_id"/>
+	            <generated-value />
+        	</id>
+		</attributes>
+	</entity>
+</entity-mappings>

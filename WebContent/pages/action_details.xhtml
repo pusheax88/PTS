@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi"
+      xmlns:rs="http://java.sun.com/jsf/composite/select">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Action Details</ui:define>
+		<ui:define name="headerLinks">
+			<table>
+				<tr>
+					<td>
+						<h:form>
+							<h:commandLink value="#{msg_actions.edit}" action="#{actionDetailsPage.editActionAction}" 
+									rendered="#{!loginBean.isUserInRole('user') and actionDetailsPage.readonly}" >
+							</h:commandLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandLink value="#{msg_actions.delete}" action="#{actionDetailsPage.deleteActionAction}" 
+										rendered="#{!loginBean.isUserInRole('user')}" >
+									<f:param name="actionID" value="#{actionDetailsPage.action.id}"/>
+							</h:commandLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:commandLink value="#{msg_actions.back}" action="#{actionDetailsPage.viewActionAction}" 
+								rendered="#{!actionDetailsPage.readonly}" >
+							</h:commandLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/problem_details.jsf" >
+								<h:outputText value="#{msg_actions.return_to_problem}" />
+								<f:param name="problemID" value="#{actionDetailsPage.problemID}"/>
+							</h:outputLink>
+						</h:form>
+					</td>
+				</tr>
+			</table>
+		</ui:define>
+		<ui:define name="pageBody">
+				<h:form>
+					<h:panelGrid class="generic" columns="4">
+				    	<h:outputText value="#{msg_actions.action_id}" />
+				    	<h:outputText value="#{msg_actions.action_description}" />
+				    	<h:outputText value="#{msg_actions.action_actor}" />
+				    	<h:outputText value="#{msg_actions.action_date}" />
+				    	
+				    	<h:outputText value="#{actionDetailsPage.action.id}" />
+				    	<h:inputText value="#{actionDetailsPage.actionDescription}" readonly="#{actionDetailsPage.readonly}"/>
+				    	<h:outputText value="#{actionDetailsPage.action.actor.name}" />
+				    	<h:outputText value="#{actionDetailsPage.action.actionDate}" >
+				    		<f:convertDateTime type="date" />
+				    	</h:outputText>
+			    	</h:panelGrid>
+			    	
+			    	<div align="left">
+				    	<h:commandButton type="submit" value="#{msg_actions.submit}" binding="#{actionDetailsPage.submitButton}"
+				    				action="#{actionDetailsPage.saveActionAction}" >
+				    	</h:commandButton>
+			    	</div>
+			    	<br/>
+			    	<h:messages />
+			    	
+		    	</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

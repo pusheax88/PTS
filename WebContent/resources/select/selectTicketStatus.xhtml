@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<composite:interface>
+		<composite:attribute name="value" required="true"/>
+		<composite:attribute name="disabled" />
+		<composite:attribute name="rendered" />
+		<composite:attribute name="binding" />
+	</composite:interface>
+
+	<composite:implementation>
+    	<h:form>
+    		<h:selectOneMenu
+	    				value="#{cc.attrs.value}" 
+	    				disabled="#{cc.attrs.disabled}"
+	    				rendered="#{cc.attrs.rendered}" 
+	    				binding="#{cc.attrs.binding}">
+    				<f:selectItem itemValue="1" itemLabel="Open" />
+    				<f:selectItem itemValue="2" itemLabel="In Progress" />
+    				<f:selectItem itemValue="3" itemLabel="Verified" />
+    				<f:selectItem itemValue="4" itemLabel="Closed" />
+    				<f:selectItem itemValue="5" itemLabel="Reopened" />
+    		</h:selectOneMenu>
+    	</h:form>
+	</composite:implementation>
+</html>

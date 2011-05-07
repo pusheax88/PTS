@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Create new Ticket</ui:define>
+		<ui:define name="headerLinks">
+			<table>
+				<tr>
+					<td><ez:command_link value="#{msg_tickets.back}" action="#{ticketCreationPage.viewTicketsAction}" /></td>
+				</tr>
+			</table>
+		</ui:define>
+		<ui:define name="pageBody">
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg_tickets.ticket_name}" />
+			    	<h:inputTextarea value="#{ticketCreationPage.ticketName}" />
+					<h:outputText value="#{msg_tickets.ticket_description}" />
+			    	<h:inputTextarea value="#{ticketCreationPage.ticketDescription}" />
+		    	</h:panelGrid>
+		    	<h:commandButton action="#{ticketCreationPage.submitTicketAction}" value="#{msg_tickets.submit}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

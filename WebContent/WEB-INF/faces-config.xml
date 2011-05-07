@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+
+	<application>
+	    <variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+	    <locale-config>
+            <default-locale>ru</default-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>Messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        
+        <resource-bundle>
+            <base-name>Msg_Tickets</base-name>
+            <var>msg_tickets</var>
+        </resource-bundle>
+        
+        <resource-bundle>
+            <base-name>Msg_Problems</base-name>
+            <var>msg_problems</var>
+        </resource-bundle>
+        
+        <resource-bundle>
+            <base-name>Msg_Actions</base-name>
+            <var>msg_actions</var>
+        </resource-bundle>
+	</application>
+	
+	<lifecycle>
+		<phase-listener>pts.core.listener.LoggedInPhaseListener</phase-listener>
+	</lifecycle>
+	
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/pages/welcome.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>fail</from-outcome>
+			<to-view-id>/error.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>

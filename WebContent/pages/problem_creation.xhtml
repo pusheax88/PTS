@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi"
+      xmlns:rich="http://richfaces.org/rich">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Create new Problem</ui:define>
+		<ui:define name="headerLinks">
+			<table>
+				<tr>
+					<td>
+						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/ticket_details.jsf" >
+								<h:outputText value="#{msg_problems.back}" />
+								<f:param name="ticketID" value="#{problemCreationPage.ticketID}"/>
+							</h:outputLink>
+						</h:form>
+					</td>
+				</tr>
+			</table>
+		</ui:define>
+		<ui:define name="pageBody">
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg_problems.problem_name}" />
+			    	<h:inputTextarea value="#{problemCreationPage.problemName}" />
+					<h:outputText value="#{msg_problems.problem_description}" />
+			    	<h:inputTextarea value="#{problemCreationPage.problemDescription}" />
+			    	
+			    	<h:outputText value="#{msg_problems.problem_from_date}" />
+			    	<rich:calendar value="#{problemCreationPage.problemFromDate}" />
+			    	
+			    	<h:outputText value="#{msg_problems.problem_to_date}" />
+			    	<rich:calendar value="#{problemCreationPage.problemToDate}" />
+		    	</h:panelGrid>
+		    	<h:commandButton action="#{problemCreationPage.submitProblemAction}" value="#{msg_problems.submit}" >
+		    		<f:param name="ticketID" value="#{problemCreationPage.ticketID}" />
+		    	</h:commandButton>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

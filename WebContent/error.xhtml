@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<div style="margin-left:25%; margin-right:25%; 
+			margin-top: 10%; text-align: center; background-color: #CAD6E0; 
+			font-size: 18px; border:1px solid #CAD6E0; width: 400px;">
+		<h:outputText value="#{msg.login_error}"/>
+	</div>
+	<div style="margin-left:25%; margin-right:25%; text-align: center; border:1px solid #CAD6E0; width: 400px;">
+		<h:outputLink value="#{request.contextPath}/login.jsf">
+			<h:outputText value="#{msg.login_page}" />
+		</h:outputLink>
+	</div>
+</body>
+</html>
