@@ -9,6 +9,10 @@ import javax.faces.context.FacesContext;
 import pts.controller.user.UserManager;
 import pts.model.user.User;
 
+/**
+ * Bean used to bind user to current session.
+ * Also provides role checks.
+ */
 @ManagedBean(name="loginBean")
 @SessionScoped
 public class LoginBean
@@ -30,16 +34,26 @@ public class LoginBean
 		this.userManager = userManager;
 	}
 	
+	/**
+	 * Gets user for current session.
+	 */
 	public User getUser()
 	{
 		return user;
 	}
 	
+	/**
+	 * Set to null to expire session.
+	 */
 	public void setUser(User user)
 	{
 		this.user = user;
 	}
 	
+	/**
+	 * Role check.
+	 * 
+	 */
 	public boolean isUserInRole(String role)
 	{
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();

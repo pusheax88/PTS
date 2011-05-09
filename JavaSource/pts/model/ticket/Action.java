@@ -14,6 +14,10 @@ import org.hibernate.annotations.Cascade;
 
 import pts.model.user.User;
 
+/**
+ * That which can be done to solve the problem.
+ * 
+ */
 @Entity
 @Table(name = "ACTION")
 public class Action

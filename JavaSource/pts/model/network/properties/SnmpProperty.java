@@ -9,6 +9,11 @@ import pts.core.util.CommonTool;
 
 import thewebsemantic.Namespace;
 
+/**
+ * Simple Network Management Protocol property of network element.
+ * Used as a metric in given network to distinguish between classes of problems.
+ * 
+ */
 @Entity
 @Table(name="SNMP_PROPERTY")
 @Namespace(value="http://jscc.ru/pts#")

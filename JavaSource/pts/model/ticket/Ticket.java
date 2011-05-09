@@ -1,3 +1,6 @@
+/**
+ * The model to define ticket tracking system.
+ */
 package pts.model.ticket;
 
 import java.util.ArrayList;
@@ -22,6 +25,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import pts.model.user.User;
 
+/**
+ * The unit which represents a group of related network problems.
+ * 
+ */
 @Entity
 @Table(name = "TICKET")
 public class Ticket

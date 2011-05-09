@@ -20,6 +20,10 @@ import pts.model.network.properties.SnmpProperty;
 import pts.model.network.transport.Interface;
 import thewebsemantic.Namespace;
 
+/**
+ * NetworkElement with location and interfaces.
+ *
+ */
 @Entity
 @DiscriminatorValue("Device")
 @Namespace(value="http://jscc.ru/pts#")

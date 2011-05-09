@@ -22,6 +22,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import pts.model.network.NetworkElement;
 
+/**
+ * Distinguishable problem for ticket.
+ * 
+ */
 @Entity
 @Table(name = "PROBLEM")
 public class Problem

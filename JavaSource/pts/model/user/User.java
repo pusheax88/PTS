@@ -11,6 +11,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+/**
+ * Entity with name, password, email and role.
+ * Used for means of security and for tracking users which can be assigned problems.
+ */
 @Entity
 @Table(name = "WEB_USER")
 public class User

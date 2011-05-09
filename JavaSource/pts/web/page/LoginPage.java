@@ -9,6 +9,10 @@ import javax.servlet.ServletException;
 
 import pts.core.LoginBean;
 
+/**
+ * Java bean associated with login.jsf, error.jsf.
+ * 
+ */
 @ManagedBean(name="loginPage")
 @RequestScoped
 public class LoginPage

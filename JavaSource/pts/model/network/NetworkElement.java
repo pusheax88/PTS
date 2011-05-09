@@ -26,6 +26,10 @@ import pts.core.util.CommonTool;
 import pts.model.network.properties.SnmpProperty;
 import thewebsemantic.Namespace;
 
+/**
+ * Represents any network element. Extend it to provide specific implementation.
+ *
+ */
 @Entity
 @Table(name="NETWORK_ELEMENT")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)

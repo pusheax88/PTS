@@ -22,6 +22,13 @@ import pts.core.util.CommonTool;
 
 import thewebsemantic.Namespace;
 
+/**
+ * The root of network model hierarchy.
+ * Simple implementation of network, which contains only network elements.
+ * Uses Hibernate annotations for persistence. 
+ * @Id annotaiton provides SQL PK and unique URI suffix for Jenabean.
+ * @see NetworkElement
+ */
 @Entity
 @Table(name="NETWORK")
 @Namespace(value="http://jscc.ru/pts#")

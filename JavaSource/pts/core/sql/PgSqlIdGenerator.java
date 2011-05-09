@@ -11,6 +11,10 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import pts.core.util.BeanFinder;
 
+/**
+ * Postgresql sequence implementation of IdGenerator.
+ * 
+ */
 @ManagedBean(name = "IdGenerator")
 @ApplicationScoped
 public class PgSqlIdGenerator implements IdGenerator

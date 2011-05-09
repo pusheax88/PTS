@@ -101,6 +101,7 @@
 		<tx:attributes>
 			<tx:method name="save*" />
 			<tx:method name="add*" />
+			<tx:method name="delete*" />
 			<tx:method name="*" read-only="true" />
 		</tx:attributes>
 	</tx:advice>

@@ -1,3 +1,6 @@
+/**
+ * The means by which network elements connect to each other.
+ */
 package pts.model.network.transport;
 
 import java.util.ArrayList;

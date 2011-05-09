@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 
 import thewebsemantic.Namespace;
 
+/**
+ * Interface is a port in device which leads to another Interface.
+ * Default implementation of ConnectionPoint.
+ */
 @Entity
 @DiscriminatorValue("Interface")
 @Namespace(value="http://jscc.ru/pts#")
