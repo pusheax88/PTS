@@ -1,18 +1,36 @@
 package pts.ticket.util;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
 
+import org.junit.Test;
+
 import pts.controller.ticket.TicketManager;
+import pts.model.ticket.Problem;
 import pts.model.ticket.Ticket;
 
 @ManagedBean
 public class TicketManagerStub implements TicketManager
 {
 	private Collection<Ticket> tickets = new ArrayList<Ticket>();
+	
+	@Test
+	public void testSave()
+	{
+		TicketManagerStub ticketManager = new TicketManagerStub();
+		
+		Ticket t = new Ticket();
+		t.setId(1L);
+		t.setDescription("Description of first ticket");
+		
+		ticketManager.saveTicket(t);
+		assertEquals(4, ticketManager.getTickets().size());
+	}
 
 	@Override
 	public Collection<Ticket> getTickets()
@@ -49,6 +67,22 @@ public class TicketManagerStub implements TicketManager
 		t4.setDescription("Description of fourth ticket");
 		
 		return t4;
+	}
+
+	@Override
+	public void addProblem(Long ticketID, Problem... p)
+	{
+	}
+
+	@Override
+	public void deleteTicket(Long ticketID)
+	{
+	}
+
+	@Override
+	public boolean compareTickets(Ticket t1, Ticket t2)
+	{
+		return false;
 	}
 
 }

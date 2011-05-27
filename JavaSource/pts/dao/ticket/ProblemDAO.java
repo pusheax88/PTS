@@ -2,6 +2,7 @@ package pts.dao.ticket;
 
 import java.util.Collection;
 
+import pts.model.network.NetworkElement;
 import pts.model.ticket.Action;
 import pts.model.ticket.Problem;
 
@@ -13,5 +14,6 @@ public interface ProblemDAO
 	public void saveProblem(Problem p);
 	public void saveProblems(Collection<Problem> p);
 	public void addAction(Long problemID, Action... a);
+	public void addAne(Long problemID, NetworkElement... ne);
 	public void deleteProblem(Long problemID);
 }

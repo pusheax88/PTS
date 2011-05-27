@@ -7,21 +7,21 @@ body {
 
 .header {
 	font-size: 18px;
-	border:1px solid #CAD6E0; 
+	border: 1px solid #CAD6E0;
 	background-color: #CAD6E0;
 }
 
 .links {
-	border:1px solid #CAD6E0; 
-	height: 25px; 
-	margin-top: 5px; 
-	margin-left: 10%; 
+	border: 1px solid #CAD6E0;
+	height: 25px;
+	margin-top: 5px;
+	margin-left: 10%;
 	margin-right: 10%;
 }
 
 .content {
 	margin-top: 8px;
-	border:1px solid #CAD6E0;
+	border: 1px solid #CAD6E0;
 }
 
 .footer {
@@ -31,14 +31,14 @@ body {
 	color: #8E969D;
 }
 
-td.delimiter{
+td.delimiter {
 	background: #CAD6E0;
 }
 
-div#page-content{
+div#page-content {
 	margin-left: 10px;
 	margin-top: 10px;
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
 }
 
 table.generic {
@@ -47,21 +47,78 @@ table.generic {
 	border-style: none;
 	border-color: white;
 	border-collapse: separate;
-	background-color: rgb(250, 240, 230);
 }
+
 table.generic th {
 	border-width: 1px;
 	padding: 1px;
 	border-style: solid;
 	border-color: gray;
-	background-color: rgb(250, 240, 230);
 	-moz-border-radius: ;
 }
+
 table.generic td {
 	border-width: 1px;
 	padding: 1px;
 	border-style: solid;
 	border-color: gray;
-	background-color: rgb(250, 240, 230);
 	-moz-border-radius: ;
+}
+
+<!--Vertical Menu -->
+#menu {
+	list-style: none;
+	width: 150px;
+	padding-top: 35px;
+	height: 170px;
+	padding-left: 50px;
+	background: url(images/background.png) no-repeat;
+}
+
+#menu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#menu a:link {
+	color: #b8b8b8;
+	font-family: Trebuchet MS;
+	font-size: 13px;
+	height: 20px;
+	display: block;
+	text-decoration: none;
+	padding: 8px 0 0 0px;
+	font-weight: normal;
+}
+
+#menu a:visited {
+	text-decoration: line-through;
+}
+
+#menu a:hover {
+	color: #595959;
+}
+
+#menu a:active {
+	color: #dbdbdb;
+}
+
+<!-- Horizontal Menu -->
+div#horiz-menu{
+	margin-top: 5px;
+	list-style-type:none;
+	position:relative;
+	display:block;
+	height:15px;
+	text-transform:uppercase;
+	font-size:10px;
+	font-weight:bold;
+	font-family:Helvetica,Arial,Verdana,sans-serif;
+}
+div#horiz-menu a{
+	display:block;
+	color:#6d7078;
+	text-decoration:none;
+	font-weight:bold;
 }

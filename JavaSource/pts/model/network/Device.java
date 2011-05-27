@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,10 +12,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import pts.model.network.properties.SnmpProperty;
+import pts.model.network.properties.SnmpPropertyDefinition;
 import pts.model.network.transport.Interface;
 import thewebsemantic.Namespace;
 
@@ -29,13 +29,13 @@ import thewebsemantic.Namespace;
 @Namespace(value="http://jscc.ru/pts#")
 public class Device extends NetworkElement 
 {
-	@OneToOne(cascade = CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	@OneToOne
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name="LOCATION_ID", referencedColumnName="LOCATION_ID")
 	private Location location;
 	
-	@OneToMany(cascade={CascadeType.ALL})
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	@OneToMany
+	@Cascade({CascadeType.ALL})
 	@JoinTable(
             name="DEVICE_TO_INTERFACE",
             joinColumns = @JoinColumn( name="NETWORK_ELEMENT_ID"),
@@ -43,14 +43,21 @@ public class Device extends NetworkElement
     )
     @LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Interface> interfaces;
+	
+	//for graphical representation in DIA
+	private Boolean host = false;
 
+	public Device() 
+	{
+	}
+	
 	public Device(String name) 
 	{
 		super(name);
 		this.interfaces = new ArrayList<Interface>();
 	}
 	
-	public Device(String name, Collection<SnmpProperty> properties)
+	public Device(String name, Collection<SnmpPropertyDefinition> properties)
 	{
 		super(name, properties);
 		this.interfaces = new ArrayList<Interface>();
@@ -64,6 +71,22 @@ public class Device extends NetworkElement
 	public Location getLocation() 
 	{
 		return location;
+	}
+
+	public boolean getHost()
+	{
+		return host != null && host;
+	}
+
+	public void setHost(boolean host)
+	{
+		this.host = host;
+	}
+	
+	@Override
+	public String getElementType()
+	{
+		return getHost() ? "Host" : "Router";
 	}
 
 	public Collection<Interface> getInterfaces() 
@@ -105,6 +128,12 @@ public class Device extends NetworkElement
 				}
 			}
 		}
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
 	}
 	
 }

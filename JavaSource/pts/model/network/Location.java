@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import pts.core.util.CommonTool;
-
 import thewebsemantic.Namespace;
 
 @Entity
@@ -19,6 +18,10 @@ public class Location
 	private Long id;
 
 	private String name;
+	
+	public Location()
+	{
+	}
 	
 	public Location(String name)
 	{

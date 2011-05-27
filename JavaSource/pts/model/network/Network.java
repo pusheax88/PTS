@@ -14,12 +14,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import pts.core.util.CommonTool;
-
 import thewebsemantic.Namespace;
 
 /**
@@ -39,9 +37,10 @@ public class Network
 	private Long id;
 	
 	private String name;
+	private String description;
 	
 	@OneToMany(cascade={CascadeType.ALL})
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	//@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinTable(
             name="NETWORK_TO_NETWORK_ELEMENT",
             joinColumns = @JoinColumn( name="NETWORK_ID"),
@@ -65,7 +64,6 @@ public class Network
 	
 	public Network()
 	{
-		this("Default Network name", new ArrayList<NetworkElement>());
 	}
 	
 	public Long getId()
@@ -87,7 +85,17 @@ public class Network
 	{
 		this.name = name;
 	}
-	
+
+	public String getDescription()
+	{
+		return description;
+	}
+
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+
 	public Collection<NetworkElement> getNetworkElements()
 	{
 		return networkElements;

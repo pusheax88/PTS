@@ -21,6 +21,15 @@
 					</td>
 					<td>
 						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/ticket_resolver.jsf"
+									rendered="#{ticketDetailsPage.readonly}">
+				    			<h:outputText value="#{msg_tickets.find_similar}" />
+				    			<f:param name="ticketID" value="#{ticketDetailsPage.ticketID}"/>
+			    			</h:outputLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
 						<h:commandLink value="#{msg_tickets.edit}" action="#{ticketDetailsPage.editTicketAction}" 
 								rendered="#{!loginBean.isUserInRole('user') and ticketDetailsPage.readonly}" >
 						</h:commandLink>
@@ -45,6 +54,7 @@
 			</table>
 		</ui:define>
 		<ui:define name="pageBody">
+				<h3>#{msg_tickets.h_ticket_details} #{ticketDetailsPage.ticket.id}</h3>
 				<h:form>
 					<h:panelGrid class="generic" columns="5">
 				    	<h:outputText value="#{msg_tickets.ticket_id}" />
@@ -87,6 +97,7 @@
 			    	<h:messages />
 			    	
 			    	<br />
+			    	<h3>#{msg_tickets.h_ticket_problems}</h3>
 			    	<h:dataTable class="generic" value="#{ticketDetailsPage.problems}" var="p">
 			    		<h:column>
 			    			<f:facet name="header">

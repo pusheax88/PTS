@@ -1,6 +1,7 @@
 package pts.controller.ticket;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 import javax.faces.bean.ApplicationScoped;
@@ -10,6 +11,7 @@ import javax.faces.bean.ManagedProperty;
 import org.apache.log4j.Logger;
 
 import pts.dao.ticket.ProblemDAO;
+import pts.model.network.NetworkElement;
 import pts.model.ticket.Action;
 import pts.model.ticket.Problem;
 
@@ -85,6 +87,27 @@ public class DefaultProblemManager implements ProblemManager
 		log.debug("Deleting problem " + problemID);
 		
 		problemDAO.deleteProblem(problemID);
+	}
+
+	@Override
+	public void addAne(Long problemID, NetworkElement... ne)
+	{
+		problemDAO.addAne(problemID, ne);
+	}
+
+	@Override
+	public Collection<NetworkElement> getAffectedNetworkElements(Long problemID)
+	{
+		if(problemID == null)
+		{
+			return Collections.emptyList();
+		}
+		Problem p = getProblem(problemID);
+		if(p == null)
+		{
+			return Collections.emptyList();
+		}
+		return p.getAffectedNetworkElements();
 	}
 
 }

@@ -21,6 +21,15 @@
 					</td>
 					<td>
 						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/ane_creation.jsf"
+									rendered="#{!loginBean.isUserInRole('user') and problemDetailsPage.readonly}">
+				    			<h:outputText value="#{msg_problems.add_ane}" />
+				    			<f:param name="problemID" value="#{problemDetailsPage.problem.id}"/>
+			    			</h:outputLink>
+						</h:form>
+					</td>
+					<td>
+						<h:form>
 						<h:commandLink value="#{msg_problems.edit}" action="#{problemDetailsPage.editProblemAction}" 
 								rendered="#{!loginBean.isUserInRole('user') and problemDetailsPage.readonly}" >
 						</h:commandLink>
@@ -53,6 +62,7 @@
 			</table>
 		</ui:define>
 		<ui:define name="pageBody">
+				<h3>#{msg_problems.h_problem_details} #{problemDetailsPage.problem.id}</h3>
 				<h:form>
 					<h:panelGrid class="generic" columns="5">
 				    	<h:outputText value="#{msg_problems.problem_id}" />
@@ -82,17 +92,18 @@
 			    	<h:messages />
 			    	
 			    	<br />
+			    	<h3>#{msg_problems.h_problem_actions}</h3>
 			    	<h:dataTable class="generic" value="#{problemDetailsPage.problem.actions}" var="a">
 			    		<h:column>
 			    			<f:facet name="header">
 			    				<h:outputText value="#{msg_problems.action}" />
 			    			</f:facet>
 			    			<h:form>
-							<h:outputLink value="#{request.contextPath}/pages/action_details.jsf">
-				    			<h:outputText value="#{a.id}" />
-				    			<f:param name="actionID" value="#{a.id}"/>
-			    			</h:outputLink>
-						</h:form>
+								<h:outputLink value="#{request.contextPath}/pages/action_details.jsf">
+					    			<h:outputText value="#{a.id}" />
+					    			<f:param name="actionID" value="#{a.id}"/>
+				    			</h:outputLink>
+							</h:form>
 			    		</h:column>
 			    		<h:column>
 			    			<f:facet name="header">
@@ -113,6 +124,29 @@
 			    				<h:outputText value="#{msg_problems.action_actor}" />
 			    			</f:facet>
 			    			<h:outputText value="#{a.actor.name}" />
+			    		</h:column>
+			    	</h:dataTable>
+		    	
+		    		<br />
+		    		<h3>#{msg_problems.h_problem_ane}</h3>
+			    	<h:dataTable class="generic" value="#{problemDetailsPage.problem.affectedNetworkElements}" var="ane">
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_problems.ane_id}" />
+			    			</f:facet>
+			    			<h:form>
+								<h:outputLink value="#{request.contextPath}/pages/network_elem_details.jsf">
+					    			<h:outputText value="#{ane.id}" />
+					    			<f:param name="networkElementID" value="#{ane.id}"/>
+				    			</h:outputLink>
+							</h:form>
+			    		</h:column>
+			    		
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_problems.ane_name}" />
+			    			</f:facet>
+			    			<h:outputText value="#{ane.name}" />
 			    		</h:column>
 			    	</h:dataTable>
 		    	</h:form>

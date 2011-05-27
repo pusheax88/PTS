@@ -2,7 +2,6 @@ package pts.dao.ticket;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.ApplicationScoped;
@@ -55,10 +54,11 @@ public class JDBCActionDAO implements ActionDAO
 	@Override
 	public void saveActions(Collection<Action> actions)
 	{
-		for (Iterator<Action> iterator = actions.iterator(); iterator.hasNext();)
-		{
-			saveAction(iterator.next());
-		}
+		hibernateTemplate.saveOrUpdateAll(actions);
+//		for (Iterator<Action> iterator = actions.iterator(); iterator.hasNext();)
+//		{
+//			saveAction(iterator.next());
+//		}
 	}
 
 	@Override

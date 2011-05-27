@@ -1,7 +1,6 @@
 package pts.dao.ticket;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.ApplicationScoped;
@@ -13,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.util.CollectionUtils;
 
+import pts.model.network.NetworkElement;
 import pts.model.ticket.Action;
 import pts.model.ticket.Problem;
 
@@ -63,10 +63,10 @@ public class JDBCProblemDAO implements ProblemDAO
 	@Override
 	public void saveProblem(Problem p)
 	{
-		if(!CollectionUtils.isEmpty(p.getActions()))
-		{
-			actionDAO.saveActions(p.getActions());
-		}
+//		if(!CollectionUtils.isEmpty(p.getActions()))
+//		{
+//			actionDAO.saveActions(p.getActions());
+//		}
 		hibernateTemplate.saveOrUpdate(p);
 	}
 
@@ -78,10 +78,11 @@ public class JDBCProblemDAO implements ProblemDAO
 			log.debug("Nothing to save - passed null collection problems");
 			return;
 		}
-		for (Iterator<Problem> iterator = problems.iterator(); iterator.hasNext();)
-		{
-			saveProblem(iterator.next());
-		}
+		hibernateTemplate.saveOrUpdateAll(problems);
+//		for (Iterator<Problem> iterator = problems.iterator(); iterator.hasNext();)
+//		{
+//			saveProblem(iterator.next());
+//		}
 	}
 
 	@Override
@@ -122,6 +123,14 @@ public class JDBCProblemDAO implements ProblemDAO
 	{
 		hibernateTemplate.delete(
 				getProblem(problemID));
+	}
+
+	@Override
+	public void addAne(Long problemID, NetworkElement... ne)
+	{
+		Problem p = getProblem(problemID);
+		p.addAffectedNetworkElements(ne);
+		saveProblem(p);
 	}
 
 }

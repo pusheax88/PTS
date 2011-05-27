@@ -40,20 +40,26 @@
 	<table class="content" align="center" cellpadding="1" cellspacing="0"
 		width="80%" height="80%">
 		<tr>
-			<td width="15%" align="center" valign="top">
-				<h:outputLink value="#{request.contextPath}/pages/tickets.jsf">
-					${msg.menu_tickets}<br/>
-				</h:outputLink>
-				<h:outputLink value="#{request.contextPath}/pages/networks.jsf" 
-						rendered="#{!loginBean.isUserInRole('user')}">
-					${msg.menu_network_elements}<br/>
-				</h:outputLink>
-				<h:outputLink value="#{request.contextPath}/pages/help.jsf">
-					${msg.menu_help}<br/>
-				</h:outputLink>
-				<h:outputLink value="#{request.contextPath}/pages/about.jsf">
-					${msg.menu_about}<br/>
-				</h:outputLink>
+			<td id="menu" width="15%" align="center" valign="top">
+				<ul>
+					<li><h:outputLink value="#{request.contextPath}/pages/tickets.jsf">
+						${msg.menu_tickets}
+					</h:outputLink></li>
+					<li><h:outputLink value="#{request.contextPath}/pages/networks.jsf" 
+							rendered="#{!loginBean.isUserInRole('user')}">
+						${msg.menu_networks}
+					</h:outputLink></li>
+					<li><h:outputLink value="#{request.contextPath}/pages/stats.jsf" 
+							rendered="#{!loginBean.isUserInRole('user')}">
+						${msg.menu_stats}
+					</h:outputLink></li>
+					<li><h:outputLink value="#{request.contextPath}/pages/help.jsf">
+						${msg.menu_help}
+					</h:outputLink></li>
+					<li><h:outputLink value="#{request.contextPath}/pages/about.jsf">
+						${msg.menu_about}
+					</h:outputLink></li>
+				</ul>
 			</td>
 			<td class="delimiter" width="1" ></td>
 			<td width="85%">

@@ -10,8 +10,6 @@ public class ElementProperty<T>
 	
 	public ElementProperty()
 	{
-		name = "Default property name";
-		value = null;
 	}
 	
 	public ElementProperty(String name, T value)

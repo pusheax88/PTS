@@ -64,6 +64,10 @@ public class TicketDetailsPage
 	@PostConstruct
 	public void resolveTicket()
 	{
+		if(ticketID == null)
+		{
+			return;
+		}
 		//Resolve Ticket
 		log.debug("Resolving ticket for ticketID = " + ticketID);
 		ticket = ticketManager.getTicket(
@@ -149,12 +153,10 @@ public class TicketDetailsPage
 				res[i] = new SelectItem(u.getId(), u.getName());
 				i++;
 			}
-			return res;
+			allUsers = res;
 		}
-		else
-		{
-			return allUsers;
-		}
+		
+		return allUsers;
 	}
 
 	public void setReadonly(boolean readonly)

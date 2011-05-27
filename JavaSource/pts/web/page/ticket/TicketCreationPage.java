@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 
 import pts.controller.ticket.TicketManager;
 import pts.core.util.BeanFinder;
+import pts.core.util.JsfTool;
 import pts.model.ticket.Ticket;
 import pts.model.ticket.TicketStatus;
 
@@ -47,7 +48,7 @@ public class TicketCreationPage
 	}
 	
 	//Navigation
-	public String submitTicketAction()
+	public void submitTicketAction()
 	{
 		TicketManager ticketManager = BeanFinder.findBean("ticketManager", TicketManager.class);
 		
@@ -58,7 +59,7 @@ public class TicketCreationPage
 		t.setStatus(TicketStatus.OPEN);
 		ticketManager.saveTicket(t);
 		
-		return "submit";
+		JsfTool.redirect("/pages/tickets.jsf");
 	}
 	
 	public String viewTicketsAction()

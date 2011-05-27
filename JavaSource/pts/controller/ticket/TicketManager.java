@@ -13,4 +13,6 @@ public interface TicketManager
 	public void saveTicket(Ticket t);
 	public void addProblem(Long ticketID, Problem... p);
 	public void deleteTicket(Long ticketID);
+	public boolean compareTickets(Ticket t1, Ticket t2);
+	public Collection<Ticket> findSimilarTicket(Ticket ticket);
 }

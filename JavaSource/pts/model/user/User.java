@@ -1,6 +1,5 @@
 package pts.model.user;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  * Entity with name, password, email and role.
@@ -30,8 +30,8 @@ public class User
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	@OneToOne
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name="ROLE_ID", referencedColumnName="ROLE_ID")
 	private Role role;
 	

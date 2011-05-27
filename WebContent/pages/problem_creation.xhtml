@@ -22,6 +22,7 @@
 			</table>
 		</ui:define>
 		<ui:define name="pageBody">
+			<h3>#{msg_problems.h_create_problem} #{problemCreationPage.ticketID}</h3>
 			<h:form>
 				<h:panelGrid columns="2">
 					<h:outputText value="#{msg_problems.problem_name}" />
@@ -30,10 +31,10 @@
 			    	<h:inputTextarea value="#{problemCreationPage.problemDescription}" />
 			    	
 			    	<h:outputText value="#{msg_problems.problem_from_date}" />
-			    	<rich:calendar value="#{problemCreationPage.problemFromDate}" />
+			    	<rich:calendar datePattern="dd/MM/yyyy HH:mm" value="#{problemCreationPage.problemFromDate}" />
 			    	
 			    	<h:outputText value="#{msg_problems.problem_to_date}" />
-			    	<rich:calendar value="#{problemCreationPage.problemToDate}" />
+			    	<rich:calendar datePattern="dd/MM/yyyy HH:mm" value="#{problemCreationPage.problemToDate}" />
 		    	</h:panelGrid>
 		    	<h:commandButton action="#{problemCreationPage.submitProblemAction}" value="#{msg_problems.submit}" >
 		    		<f:param name="ticketID" value="#{problemCreationPage.ticketID}" />

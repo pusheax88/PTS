@@ -17,6 +17,10 @@ import thewebsemantic.Namespace;
 public class Interface extends ConnectionPoint 
 {
 	
+	public Interface()
+	{
+	}
+	
 	public Interface(String name)
 	{
 		super(name);

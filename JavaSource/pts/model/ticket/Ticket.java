@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +19,7 @@ import javax.persistence.Table;
 
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -49,18 +49,18 @@ public class Ticket
 	@Column(name = "TICKET_DATE")
 	private Date ticketDate;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	@OneToOne
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name="STATUS_ID", referencedColumnName="STATUS_ID")
 	private TicketStatus status;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	@OneToOne
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name="ASSIGNED_TO", referencedColumnName="USER_ID")
 	private User assignedTo;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	@OneToMany
+	@Cascade({CascadeType.ALL})
 	@JoinTable(
             name="TICKET_TO_PROBLEM",
             joinColumns = @JoinColumn( name="TICKET_ID"),

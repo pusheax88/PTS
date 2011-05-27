@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import pts.model.user.User;
 
@@ -34,7 +35,6 @@ public class Action
 	private Date actionDate;
 	
 	@OneToOne
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
 	@JoinColumn(name = "ACTOR_ID", referencedColumnName="USER_ID")
 	private User actor;
 

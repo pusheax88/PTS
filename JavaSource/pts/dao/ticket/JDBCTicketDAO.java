@@ -46,20 +46,20 @@ public class JDBCTicketDAO implements TicketDAO
 	@Override
 	public void saveTicket(Ticket t)
 	{
-		if(t.getStatus() != null)
-		{
-			hibernateTemplate.saveOrUpdate(t.getStatus());
-		}
-		
-		if(t.getAssignedTo() != null)
-		{
-			hibernateTemplate.saveOrUpdate(t.getAssignedTo());
-		}
-		
-		if(t.getProblems() != null)
-		{
-			problemDAO.saveProblems(t.getProblems());
-		}
+//		if(t.getStatus() != null)
+//		{
+//			hibernateTemplate.saveOrUpdate(t.getStatus());
+//		}
+//		
+//		if(t.getAssignedTo() != null)
+//		{
+//			hibernateTemplate.saveOrUpdate(t.getAssignedTo());
+//		}
+//		
+//		if(t.getProblems() != null)
+//		{
+//			problemDAO.saveProblems(t.getProblems());
+//		}
 		
 		hibernateTemplate.saveOrUpdate(t);
 	}

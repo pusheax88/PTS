@@ -8,13 +8,13 @@
 		<ui:define name="pageTitle">Ticket Viewer</ui:define>
 		<ui:define name="headerLinks">
 		<h:form>
-			<h:outputLink
-					value="#{request.contextPath}/pages/ticket_creation.jsf">
-				<h:outputText value="#{msg_tickets.create_ticket}" />
-			</h:outputLink>
+				<h:outputLink value="#{request.contextPath}/pages/ticket_creation.jsf">
+					#{msg_tickets.create_ticket}
+				</h:outputLink>
 		</h:form>
 		</ui:define>
 		<ui:define name="pageBody">
+			<h3>#{msg_tickets.h_tickets}</h3>
 			<h:dataTable class="generic" id='tickets_table' value="#{ticketManager.tickets}" var="t">
 		    	<h:column>
 		    		<f:facet name="header">

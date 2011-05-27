@@ -10,10 +10,12 @@ import javax.faces.component.html.HtmlCommandButton;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang.ObjectUtils;
+import org.apache.cxf.common.util.StringUtils;
 import org.apache.log4j.Logger;
 
 import pts.controller.ticket.ActionManager;
 import pts.controller.ticket.ProblemManager;
+import pts.core.util.CommonTool;
 import pts.core.util.JsfTool;
 import pts.model.ticket.Problem;
 
@@ -46,16 +48,22 @@ public class ProblemDetailsPage
 	@PostConstruct
 	public void resolveProblem()
 	{
-		//Resolve Problem
-		log.debug("Resolving problem for problemID = " + problemID);
-		problem = problemManager.getProblem(
-				Long.valueOf(problemID));
-		log.debug("Problem was resolved: " + problem);
-		
-		problemDescription = problem.getDescription();
-		problemFromDate = problem.getFromDate();
-		problemToDate = problem.getToDate();
-		setReadonly(true);
+		if(!StringUtils.isEmpty(problemID))
+		{
+			//Resolve Problem
+			log.debug("Resolving problem for problemID = " + problemID);
+			problem = problemManager.getProblem(CommonTool.toLong(problemID));
+			log.debug("Problem was resolved: " + problem);
+			
+			if(problem != null)
+			{
+				problemDescription = problem.getDescription();
+				problemFromDate = problem.getFromDate();
+				problemToDate = problem.getToDate();
+			}
+			
+			setReadonly(true);
+		}
 	}
 	
 	public String getTicketID()

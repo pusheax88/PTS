@@ -5,18 +5,19 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -49,8 +50,8 @@ public class Problem
 	@Column(name = "TO_DATE")
 	private Date toDate;
 	
-	@OneToMany(cascade={CascadeType.ALL})
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	@OneToMany
+	@Cascade({CascadeType.ALL})
 	@JoinTable(
             name="PROBLEM_TO_ACTION",
             joinColumns = @JoinColumn( name="PROBLEM_ID"),
@@ -59,8 +60,9 @@ public class Problem
     @LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<Action> actions;
 	
-	@OneToMany(cascade={CascadeType.ALL})
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	//Should set manually to null on delete
+	@ManyToMany
+	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(
             name="PROBLEM_TO_NETWORK_ELEMENT",
             joinColumns = @JoinColumn( name="PROBLEM_ID"),

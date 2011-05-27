@@ -21,12 +21,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import pts.core.util.CommonTool;
-
 import thewebsemantic.Namespace;
 
 @Entity
@@ -46,8 +44,8 @@ public class ConnectionPoint
 	
 	private String name;
 	
-	@ManyToMany(cascade={CascadeType.ALL})
-	@Cascade({org.hibernate.annotations.CascadeType.DELETE})
+	//Should be on delete set null
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
             name="CP_TO_CP",
             joinColumns = @JoinColumn( name="CONNECTION_POINT_ID", referencedColumnName="CONNECTION_POINT_ID"),
@@ -55,6 +53,10 @@ public class ConnectionPoint
     )
     @LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<ConnectionPoint> connectedTo;
+	
+	ConnectionPoint()
+	{
+	}
 	
 	ConnectionPoint(String name)
 	{
