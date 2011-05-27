@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Create new ANE</ui:define>
+		<ui:define name="headerLinks">
+			<table>
+				<tr>
+					<td>
+						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/problem_details.jsf" >
+								<h:outputText value="#{msg_networks.back}" />
+								<f:param name="problemID" value="#{aneCreationPage.problemID}"/>
+							</h:outputLink>
+						</h:form>
+					</td>
+				</tr>
+			</table>
+		</ui:define>
+		<ui:define name="pageBody">
+			<h3>#{msg_networks.h_create_ane} #{aneCreationPage.problemID}</h3>
+			<h:form>
+				<h:panelGrid columns="2">
+			    	<h:outputText value="#{msg_networks.ane_name}" />
+			    	<h:selectOneMenu value="#{aneCreationPage.ane}">
+		    			<f:selectItems value="#{aneCreationPage.allNetworkElements}"/>
+    				</h:selectOneMenu>
+		    	</h:panelGrid>
+		    	<h:commandButton action="#{aneCreationPage.submitAneAction}" value="#{msg_networks.submit}" >
+		    		<f:param name="problemID" value="#{aneCreationPage.problemID}" />
+		    	</h:commandButton>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

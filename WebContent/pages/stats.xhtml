@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi"
+      xmlns:rs="http://java.sun.com/jsf/composite/select">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Tickets statistics</ui:define>
+		<ui:define name="headerLinks">
+		</ui:define>
+		<ui:define name="pageBody">
+				<h3>#{msg_tickets.h_stats}</h3>
+				<hr />
+				<h3>#{msg_tickets.h_stats_tickets}</h3>
+				<ul>
+					<li>#{msg_tickets.stats_num_tickets} #{statsPage.numberOfTickets}</li>
+					<li>#{msg_tickets.stats_avg_num_problems} #{statsPage.numberOfProblems}</li>
+				</ul>
+				<br/>
+				<h3>#{msg_tickets.h_stats_network}</h3>
+				<h:dataTable class="generic" value="#{statsPage.netElemToNum}" var="e">
+					<h:column>
+			    		<f:facet name="header">
+			    			<h:outputText value="#{msg_tickets.stats_network_elem_name}" />
+			    		</f:facet>
+			    		<h:form>
+				    		<h:outputText value="#{e.key}" />
+			    		</h:form>
+		    		</h:column>
+		    		
+		    		<h:column>
+			    		<f:facet name="header">
+			    			<h:outputText value="#{msg_tickets.stats_num_tickets}" />
+			    		</f:facet>
+			    		<h:form>
+				    		<h:outputText value="#{e.value}" />
+			    		</h:form>
+		    		</h:column>
+				</h:dataTable>
+				
+		</ui:define>
+	</ui:composition>
+</html>

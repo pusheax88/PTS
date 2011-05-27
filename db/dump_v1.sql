@@ -1,0 +1,842 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'SQL_ASCII';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+SET search_path = public, pg_catalog;
+
+ALTER TABLE ONLY public.history_item_to_property DROP CONSTRAINT fke7a7c45821be5d10;
+ALTER TABLE ONLY public.history_item_to_property DROP CONSTRAINT fke7a7c45818026004;
+ALTER TABLE ONLY public.device_to_interface DROP CONSTRAINT fkd43c379eceba8ebb;
+ALTER TABLE ONLY public.device_to_interface DROP CONSTRAINT fkd43c379e7fa1e529;
+ALTER TABLE ONLY public.property_value_to_property_definition DROP CONSTRAINT fkc4b8f31188d4a3be;
+ALTER TABLE ONLY public.property_value_to_property_definition DROP CONSTRAINT fkc4b8f3111d64d298;
+ALTER TABLE ONLY public.ticket DROP CONSTRAINT fk937b5f0cd97d71e4;
+ALTER TABLE ONLY public.ticket DROP CONSTRAINT fk937b5f0c66034136;
+ALTER TABLE ONLY public.problem_to_action DROP CONSTRAINT fk86a82abafb6183b8;
+ALTER TABLE ONLY public.problem_to_action DROP CONSTRAINT fk86a82aba24a2eb5c;
+ALTER TABLE ONLY public.action DROP CONSTRAINT fk72c272369bcdde4f;
+ALTER TABLE ONLY public.cp_to_cp DROP CONSTRAINT fk5ec2b25fffd7b594;
+ALTER TABLE ONLY public.cp_to_cp DROP CONSTRAINT fk5ec2b25f68f36e9a;
+ALTER TABLE ONLY public.network_element_to_property DROP CONSTRAINT fk5bbd0e859b2ecfc1;
+ALTER TABLE ONLY public.network_element_to_property DROP CONSTRAINT fk5bbd0e853d91e8a2;
+ALTER TABLE ONLY public.web_user DROP CONSTRAINT fk596adf6503f80d9;
+ALTER TABLE ONLY public.problem_to_network_element DROP CONSTRAINT fk554ae5a79b2ecfc1;
+ALTER TABLE ONLY public.problem_to_network_element DROP CONSTRAINT fk554ae5a724a2eb5c;
+ALTER TABLE ONLY public.network_to_network_element DROP CONSTRAINT fk54fadb8d5b04496;
+ALTER TABLE ONLY public.network_to_network_element DROP CONSTRAINT fk54fadb89b2ecfc1;
+ALTER TABLE ONLY public.history_item_to_network_element DROP CONSTRAINT fk1e2889c89b2ecfc1;
+ALTER TABLE ONLY public.history_item_to_network_element DROP CONSTRAINT fk1e2889c818026004;
+ALTER TABLE ONLY public.ticket_to_problem DROP CONSTRAINT fk1954abcec0b4bf8;
+ALTER TABLE ONLY public.ticket_to_problem DROP CONSTRAINT fk1954abce24a2eb5c;
+ALTER TABLE ONLY public.network_element DROP CONSTRAINT fk186349ab97f0637e;
+ALTER TABLE ONLY public.web_user DROP CONSTRAINT web_user_pkey;
+ALTER TABLE ONLY public.ticket_to_problem DROP CONSTRAINT ticket_to_problem_problem_id_key;
+ALTER TABLE ONLY public.ticket_status DROP CONSTRAINT ticket_status_pkey;
+ALTER TABLE ONLY public.ticket DROP CONSTRAINT ticket_pkey;
+ALTER TABLE ONLY public.snmp_property DROP CONSTRAINT snmp_property_pkey;
+ALTER TABLE ONLY public.role DROP CONSTRAINT role_pkey;
+ALTER TABLE ONLY public.property_value_to_property_definition DROP CONSTRAINT property_value_to_property_definition_pkey;
+ALTER TABLE ONLY public.property_value DROP CONSTRAINT property_value_pkey;
+ALTER TABLE ONLY public.property_history DROP CONSTRAINT property_history_pkey;
+ALTER TABLE ONLY public.property_definition DROP CONSTRAINT property_definition_pkey;
+ALTER TABLE ONLY public.problem_to_action DROP CONSTRAINT problem_to_action_action_id_key;
+ALTER TABLE ONLY public.problem DROP CONSTRAINT problem_pkey;
+ALTER TABLE ONLY public.network_to_network_element DROP CONSTRAINT network_to_network_element_network_element_id_key;
+ALTER TABLE ONLY public.network DROP CONSTRAINT network_pkey;
+ALTER TABLE ONLY public.network_element_to_property DROP CONSTRAINT network_element_to_property_property_id_key;
+ALTER TABLE ONLY public.network_element DROP CONSTRAINT network_element_pkey;
+ALTER TABLE ONLY public.location DROP CONSTRAINT location_pkey;
+ALTER TABLE ONLY public.history_item_to_network_element DROP CONSTRAINT history_item_to_network_element_pkey;
+ALTER TABLE ONLY public.device_to_interface DROP CONSTRAINT device_to_interface_connection_point_id_key;
+ALTER TABLE ONLY public.connection_point DROP CONSTRAINT connection_point_pkey;
+ALTER TABLE ONLY public.action DROP CONSTRAINT action_pkey;
+DROP TABLE public.web_user;
+DROP TABLE public.ticket_to_problem;
+DROP TABLE public.ticket_status;
+DROP TABLE public.ticket;
+DROP TABLE public.snmp_property;
+DROP TABLE public.role;
+DROP TABLE public.property_value_to_property_definition;
+DROP TABLE public.property_value;
+DROP TABLE public.property_history;
+DROP TABLE public.property_definition;
+DROP TABLE public.problem_to_network_element;
+DROP TABLE public.problem_to_action;
+DROP TABLE public.problem;
+DROP TABLE public.network_to_network_element;
+DROP TABLE public.network_element_to_property;
+DROP TABLE public.network_element;
+DROP TABLE public.network;
+DROP TABLE public.location;
+DROP SEQUENCE public.id_seq;
+DROP TABLE public.history_item_to_property;
+DROP TABLE public.history_item_to_network_element;
+DROP SEQUENCE public.hibernate_sequence;
+DROP TABLE public.device_to_interface;
+DROP TABLE public.cp_to_cp;
+DROP TABLE public.connection_point;
+DROP TABLE public.action;
+DROP FUNCTION public.get_id();
+DROP PROCEDURAL LANGUAGE plpgsql;
+DROP SCHEMA public;
+--
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO postgres;
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+--
+-- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: postgres
+--
+
+CREATE OR REPLACE PROCEDURAL LANGUAGE plpgsql;
+
+
+ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO postgres;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Name: get_id(); Type: FUNCTION; Schema: public; Owner: ytriffy
+--
+
+CREATE FUNCTION get_id() RETURNS bigint
+    LANGUAGE plpgsql
+    AS $$declare
+res bigint;
+begin
+select into res cast(extract(year from now()) as varchar) || cast(extract(month from now()) as varchar) || cast(extract(day from now()) as varchar) || cast(extract(hour from now()) as varchar) || cast(nextval('id_seq') as varchar);
+return res;
+end;$$;
+
+
+ALTER FUNCTION public.get_id() OWNER TO ytriffy;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: action; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE action (
+    action_id bigint NOT NULL,
+    action_date timestamp without time zone,
+    description character varying(255),
+    actor_id bigint
+);
+
+
+ALTER TABLE public.action OWNER TO pts;
+
+--
+-- Name: connection_point; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE connection_point (
+    type character varying(31) NOT NULL,
+    connection_point_id bigint NOT NULL,
+    name character varying(255)
+);
+
+
+ALTER TABLE public.connection_point OWNER TO pts;
+
+--
+-- Name: cp_to_cp; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE cp_to_cp (
+    connection_point_id bigint NOT NULL,
+    connected_to bigint NOT NULL
+);
+
+
+ALTER TABLE public.cp_to_cp OWNER TO pts;
+
+--
+-- Name: device_to_interface; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE device_to_interface (
+    network_element_id bigint NOT NULL,
+    connection_point_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.device_to_interface OWNER TO pts;
+
+--
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: pts
+--
+
+CREATE SEQUENCE hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hibernate_sequence OWNER TO pts;
+
+--
+-- Name: history_item_to_network_element; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE history_item_to_network_element (
+    network_element_id bigint,
+    history_item_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.history_item_to_network_element OWNER TO pts;
+
+--
+-- Name: history_item_to_property; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE history_item_to_property (
+    history_item_id bigint NOT NULL,
+    property_value_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.history_item_to_property OWNER TO pts;
+
+--
+-- Name: id_seq; Type: SEQUENCE; Schema: public; Owner: ytriffy
+--
+
+CREATE SEQUENCE id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    MAXVALUE 10000
+    CACHE 1
+    CYCLE;
+
+
+ALTER TABLE public.id_seq OWNER TO ytriffy;
+
+--
+-- Name: location; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE location (
+    location_id bigint NOT NULL,
+    name character varying(255)
+);
+
+
+ALTER TABLE public.location OWNER TO pts;
+
+--
+-- Name: network; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE network (
+    network_id bigint NOT NULL,
+    description character varying(255),
+    name character varying(255)
+);
+
+
+ALTER TABLE public.network OWNER TO pts;
+
+--
+-- Name: network_element; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE network_element (
+    type character varying(31) NOT NULL,
+    network_element_id bigint NOT NULL,
+    name character varying(255),
+    location_id bigint
+);
+
+
+ALTER TABLE public.network_element OWNER TO pts;
+
+--
+-- Name: network_element_to_property; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE network_element_to_property (
+    network_element_id bigint NOT NULL,
+    property_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.network_element_to_property OWNER TO pts;
+
+--
+-- Name: network_to_network_element; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE network_to_network_element (
+    network_id bigint NOT NULL,
+    network_element_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.network_to_network_element OWNER TO pts;
+
+--
+-- Name: problem; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE problem (
+    problem_id bigint NOT NULL,
+    description character varying(255),
+    from_date timestamp without time zone,
+    name character varying(255),
+    to_date timestamp without time zone
+);
+
+
+ALTER TABLE public.problem OWNER TO pts;
+
+--
+-- Name: problem_to_action; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE problem_to_action (
+    problem_id bigint NOT NULL,
+    action_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.problem_to_action OWNER TO pts;
+
+--
+-- Name: problem_to_network_element; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE problem_to_network_element (
+    problem_id bigint NOT NULL,
+    network_element_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.problem_to_network_element OWNER TO pts;
+
+--
+-- Name: property_definition; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE property_definition (
+    type character varying(31) NOT NULL,
+    property_def_id bigint NOT NULL,
+    property_def_name character varying(255),
+    mib character varying(255),
+    snmp_path character varying(255)
+);
+
+
+ALTER TABLE public.property_definition OWNER TO pts;
+
+--
+-- Name: property_history; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE property_history (
+    history_item_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.property_history OWNER TO pts;
+
+--
+-- Name: property_value; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE property_value (
+    type character varying(31) NOT NULL,
+    property_value_id bigint NOT NULL,
+    property_value character varying(255),
+    date timestamp without time zone
+);
+
+
+ALTER TABLE public.property_value OWNER TO pts;
+
+--
+-- Name: property_value_to_property_definition; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE property_value_to_property_definition (
+    property_def_id bigint,
+    property_value_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.property_value_to_property_definition OWNER TO pts;
+
+--
+-- Name: role; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE role (
+    role_id bigint NOT NULL,
+    role_name character varying(255)
+);
+
+
+ALTER TABLE public.role OWNER TO pts;
+
+--
+-- Name: snmp_property; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE snmp_property (
+    property_id bigint NOT NULL,
+    mib character varying(255),
+    snmppath character varying(255)
+);
+
+
+ALTER TABLE public.snmp_property OWNER TO pts;
+
+--
+-- Name: ticket; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE ticket (
+    ticket_id bigint NOT NULL,
+    description character varying(255),
+    name character varying(255),
+    ticket_date timestamp without time zone,
+    assigned_to bigint,
+    status_id bigint
+);
+
+
+ALTER TABLE public.ticket OWNER TO pts;
+
+--
+-- Name: ticket_status; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE ticket_status (
+    status_id bigint NOT NULL,
+    status_name character varying(255)
+);
+
+
+ALTER TABLE public.ticket_status OWNER TO pts;
+
+--
+-- Name: ticket_to_problem; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE ticket_to_problem (
+    ticket_id bigint NOT NULL,
+    problem_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.ticket_to_problem OWNER TO pts;
+
+--
+-- Name: web_user; Type: TABLE; Schema: public; Owner: pts; Tablespace: 
+--
+
+CREATE TABLE web_user (
+    user_id bigint NOT NULL,
+    user_name character varying(255),
+    password character varying(255),
+    role_id bigint
+);
+
+
+ALTER TABLE public.web_user OWNER TO pts;
+
+--
+-- Name: action_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY action
+    ADD CONSTRAINT action_pkey PRIMARY KEY (action_id);
+
+
+--
+-- Name: connection_point_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY connection_point
+    ADD CONSTRAINT connection_point_pkey PRIMARY KEY (connection_point_id);
+
+
+--
+-- Name: history_item_to_network_element_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY history_item_to_network_element
+    ADD CONSTRAINT history_item_to_network_element_pkey PRIMARY KEY (history_item_id);
+
+
+--
+-- Name: location_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY location
+    ADD CONSTRAINT location_pkey PRIMARY KEY (location_id);
+
+
+--
+-- Name: network_element_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY network_element
+    ADD CONSTRAINT network_element_pkey PRIMARY KEY (network_element_id);
+
+
+--
+-- Name: network_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY network
+    ADD CONSTRAINT network_pkey PRIMARY KEY (network_id);
+
+
+--
+-- Name: problem_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY problem
+    ADD CONSTRAINT problem_pkey PRIMARY KEY (problem_id);
+
+--
+-- Name: property_definition_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY property_definition
+    ADD CONSTRAINT property_definition_pkey PRIMARY KEY (property_def_id);
+
+
+--
+-- Name: property_history_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY property_history
+    ADD CONSTRAINT property_history_pkey PRIMARY KEY (history_item_id);
+
+
+--
+-- Name: property_value_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY property_value
+    ADD CONSTRAINT property_value_pkey PRIMARY KEY (property_value_id);
+
+
+--
+-- Name: property_value_to_property_definition_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY property_value_to_property_definition
+    ADD CONSTRAINT property_value_to_property_definition_pkey PRIMARY KEY (property_value_id);
+
+
+--
+-- Name: role_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY role
+    ADD CONSTRAINT role_pkey PRIMARY KEY (role_id);
+
+
+--
+-- Name: snmp_property_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY snmp_property
+    ADD CONSTRAINT snmp_property_pkey PRIMARY KEY (property_id);
+
+
+--
+-- Name: ticket_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY ticket
+    ADD CONSTRAINT ticket_pkey PRIMARY KEY (ticket_id);
+
+
+--
+-- Name: ticket_status_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY ticket_status
+    ADD CONSTRAINT ticket_status_pkey PRIMARY KEY (status_id);
+
+
+--
+-- Name: ticket_to_problem_problem_id_key; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY ticket_to_problem
+    ADD CONSTRAINT ticket_to_problem_problem_id_key UNIQUE (problem_id);
+
+
+--
+-- Name: web_user_pkey; Type: CONSTRAINT; Schema: public; Owner: pts; Tablespace: 
+--
+
+ALTER TABLE ONLY web_user
+    ADD CONSTRAINT web_user_pkey PRIMARY KEY (user_id);
+
+
+--
+-- Name: fk186349ab97f0637e; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY network_element
+    ADD CONSTRAINT fk186349ab97f0637e FOREIGN KEY (location_id) REFERENCES location(location_id) on delete set null;
+
+
+--
+-- Name: fk1954abce24a2eb5c; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY ticket_to_problem
+    ADD CONSTRAINT fk1954abce24a2eb5c FOREIGN KEY (problem_id) REFERENCES problem(problem_id) on delete cascade;
+
+
+--
+-- Name: fk1954abcec0b4bf8; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY ticket_to_problem
+    ADD CONSTRAINT fk1954abcec0b4bf8 FOREIGN KEY (ticket_id) REFERENCES ticket(ticket_id) on delete cascade;
+
+
+--
+-- Name: fk1e2889c818026004; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY history_item_to_network_element
+    ADD CONSTRAINT fk1e2889c818026004 FOREIGN KEY (history_item_id) REFERENCES property_history(history_item_id) on delete cascade;
+
+
+--
+-- Name: fk1e2889c89b2ecfc1; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY history_item_to_network_element
+    ADD CONSTRAINT fk1e2889c89b2ecfc1 FOREIGN KEY (network_element_id) REFERENCES network_element(network_element_id) on delete cascade;
+
+
+--
+-- Name: fk54fadb89b2ecfc1; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY network_to_network_element
+    ADD CONSTRAINT fk54fadb89b2ecfc1 FOREIGN KEY (network_element_id) REFERENCES network_element(network_element_id) on delete cascade;
+
+
+--
+-- Name: fk54fadb8d5b04496; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY network_to_network_element
+    ADD CONSTRAINT fk54fadb8d5b04496 FOREIGN KEY (network_id) REFERENCES network(network_id) on delete cascade;
+
+
+--
+-- Name: fk554ae5a724a2eb5c; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY problem_to_network_element
+    ADD CONSTRAINT fk554ae5a724a2eb5c FOREIGN KEY (problem_id) REFERENCES problem(problem_id) on delete cascade;
+
+
+--
+-- Name: fk554ae5a79b2ecfc1; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY problem_to_network_element
+    ADD CONSTRAINT fk554ae5a79b2ecfc1 FOREIGN KEY (network_element_id) REFERENCES network_element(network_element_id) on delete cascade;
+
+
+--
+-- Name: fk596adf6503f80d9; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY web_user
+    ADD CONSTRAINT fk596adf6503f80d9 FOREIGN KEY (role_id) REFERENCES role(role_id) on delete cascade;
+
+
+--
+-- Name: fk5bbd0e853d91e8a2; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY network_element_to_property
+    ADD CONSTRAINT fk5bbd0e853d91e8a2 FOREIGN KEY (property_id) REFERENCES property_definition(property_def_id) on delete cascade;
+
+
+--
+-- Name: fk5bbd0e859b2ecfc1; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY network_element_to_property
+    ADD CONSTRAINT fk5bbd0e859b2ecfc1 FOREIGN KEY (network_element_id) REFERENCES network_element(network_element_id) on delete cascade;
+
+
+--
+-- Name: fk5ec2b25f68f36e9a; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY cp_to_cp
+    ADD CONSTRAINT fk5ec2b25f68f36e9a FOREIGN KEY (connected_to) REFERENCES connection_point(connection_point_id) on delete cascade;
+
+
+--
+-- Name: fk5ec2b25fffd7b594; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY cp_to_cp
+    ADD CONSTRAINT fk5ec2b25fffd7b594 FOREIGN KEY (connection_point_id) REFERENCES connection_point(connection_point_id) on delete cascade;
+
+
+--
+-- Name: fk72c272369bcdde4f; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY action
+    ADD CONSTRAINT fk72c272369bcdde4f FOREIGN KEY (actor_id) REFERENCES web_user(user_id) on delete set null;
+
+
+--
+-- Name: fk86a82aba24a2eb5c; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY problem_to_action
+    ADD CONSTRAINT fk86a82aba24a2eb5c FOREIGN KEY (problem_id) REFERENCES problem(problem_id) on delete cascade;
+
+
+--
+-- Name: fk86a82abafb6183b8; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY problem_to_action
+    ADD CONSTRAINT fk86a82abafb6183b8 FOREIGN KEY (action_id) REFERENCES action(action_id) on delete cascade;
+
+
+--
+-- Name: fk937b5f0c66034136; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY ticket
+    ADD CONSTRAINT fk937b5f0c66034136 FOREIGN KEY (assigned_to) REFERENCES web_user(user_id) on delete set null;
+
+
+--
+-- Name: fk937b5f0cd97d71e4; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY ticket
+    ADD CONSTRAINT fk937b5f0cd97d71e4 FOREIGN KEY (status_id) REFERENCES ticket_status(status_id);
+
+
+--
+-- Name: fkc4b8f3111d64d298; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY property_value_to_property_definition
+    ADD CONSTRAINT fkc4b8f3111d64d298 FOREIGN KEY (property_value_id) REFERENCES property_value(property_value_id) on delete cascade;
+
+
+--
+-- Name: fkc4b8f31188d4a3be; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY property_value_to_property_definition
+    ADD CONSTRAINT fkc4b8f31188d4a3be FOREIGN KEY (property_def_id) REFERENCES property_definition(property_def_id) on delete cascade;
+
+
+--
+-- Name: fkd43c379e7fa1e529; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY device_to_interface
+    ADD CONSTRAINT fkd43c379e7fa1e529 FOREIGN KEY (network_element_id) REFERENCES network_element(network_element_id) on delete cascade;
+
+
+--
+-- Name: fkd43c379eceba8ebb; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY device_to_interface
+    ADD CONSTRAINT fkd43c379eceba8ebb FOREIGN KEY (connection_point_id) REFERENCES connection_point(connection_point_id) on delete cascade;
+
+
+--
+-- Name: fke7a7c45818026004; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY history_item_to_property
+    ADD CONSTRAINT fke7a7c45818026004 FOREIGN KEY (history_item_id) REFERENCES property_history(history_item_id) on delete cascade;
+
+
+--
+-- Name: fke7a7c45821be5d10; Type: FK CONSTRAINT; Schema: public; Owner: pts
+--
+
+ALTER TABLE ONLY history_item_to_property
+    ADD CONSTRAINT fke7a7c45821be5d10 FOREIGN KEY (property_value_id) REFERENCES property_value(property_value_id) on delete cascade;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- Name: get_id(); Type: ACL; Schema: public; Owner: ytriffy
+--
+
+REVOKE ALL ON FUNCTION get_id() FROM PUBLIC;
+REVOKE ALL ON FUNCTION get_id() FROM ytriffy;
+GRANT ALL ON FUNCTION get_id() TO ytriffy;
+GRANT ALL ON FUNCTION get_id() TO PUBLIC;
+GRANT ALL ON FUNCTION get_id() TO pts;
+
+
+--
+-- Name: id_seq; Type: ACL; Schema: public; Owner: ytriffy
+--
+
+REVOKE ALL ON SEQUENCE id_seq FROM PUBLIC;
+REVOKE ALL ON SEQUENCE id_seq FROM ytriffy;
+GRANT ALL ON SEQUENCE id_seq TO ytriffy;
+GRANT ALL ON SEQUENCE id_seq TO pts;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

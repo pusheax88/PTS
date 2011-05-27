@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi"
+      xmlns:rs="http://java.sun.com/jsf/composite/select">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Property History</ui:define>
+		<ui:define name="headerLinks">
+			<table>
+				<tr>
+					<td>
+						<h:form>
+							<h:outputLink value="#{request.contextPath}/pages/network_elem_details.jsf">
+				    			<h:outputText value="#{msg_networks.back}" />
+				    			<f:param name="networkElementID" value="#{propertyHistoryPage.ph.networkElement.id}"/>
+			    			</h:outputLink>
+						</h:form>
+					</td>
+				</tr>
+			</table>
+		</ui:define>
+		<ui:define name="pageBody">
+				<h:form>
+					<h3>#{msg_networks.h_property_history} #{propertyHistoryPage.ph.networkElement.name}</h3>
+			    	<br />
+			    	<h:dataTable class="generic" value="#{propertyHistoryPage.properties}" var="p">
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_networks.property_def_name}" />
+			    			</f:facet>
+			    			<h:outputText value="#{p.definition.name}" />
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_networks.property_value}" />
+			    			</f:facet>
+			    			<h:outputText value="#{p.value}" />
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_networks.property_date}" />
+			    			</f:facet>
+			    			<h:outputText value="#{p.date}" />
+			    		</h:column>
+			    	</h:dataTable>
+		    	</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

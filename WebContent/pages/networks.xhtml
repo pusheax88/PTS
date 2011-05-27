@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Network Viewer</ui:define>
+		<ui:define name="headerLinks">
+			<h:form>
+				<h:outputLink value="#{request.contextPath}/pages/network_creation.jsf">
+					#{msg_networks.create_network}
+				</h:outputLink>
+			</h:form>
+		</ui:define>
+		<ui:define name="pageBody">
+			<h3>#{msg_networks.h_networks}</h3>
+			<h:dataTable class="generic" id='networks_table' value="#{networkManager.networks}" var="n">
+		    	<h:column>
+		    		<f:facet name="header">
+		    			<h:outputText value="#{msg_networks.network_name}" />
+		    		</f:facet>
+		    		<h:form>
+			    		<h:outputLink value="#{request.contextPath}/pages/network_details.jsf">
+			    			<h:outputText value="#{n.name}" />
+			    			<f:param name="networkID" value="#{n.id}" />
+			    		</h:outputLink>
+		    		</h:form>
+		    	</h:column>
+		    	<h:column>
+		    		<f:facet name="header">
+		    			<h:outputText value="#{msg_networks.network_description}" />
+		    		</f:facet>
+		    		<h:outputText value="#{n.description}" />
+		    	</h:column>
+	    	</h:dataTable>
+		</ui:define>
+	</ui:composition>
+</html>

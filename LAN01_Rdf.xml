@@ -1,0 +1,248 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.0="http://thewebsemantic.com/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.1="http://jscc.ru/pts#" > 
+  <rdf:Description rdf:about="http://jscc.ru/pts#description">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Device/1030">
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1032"/>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Device"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1017"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RouterB</j.1:name>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1018"/>
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1031"/>
+    <j.1:host rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</j.1:host>
+    <j.1:location rdf:resource="http://jscc.ru/pts#Location/1020"/>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1030</j.1:id>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1019"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1038">
+    <j.1:connectedTo rdf:resource="http://jscc.ru/pts#Interface/1031"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth0</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1038</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#connectedTo">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#interfaces">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1034">
+    <j.1:connectedTo rdf:resource="http://jscc.ru/pts#Interface/1031"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth0</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1034</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Location">
+    <j.0:javaclass>pts.model.network.Location</j.0:javaclass>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1036">
+    <j.1:connectedTo rdf:resource="http://jscc.ru/pts#Interface/1031"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth0</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1036</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#SnmpPropertyDefinition">
+    <j.0:javaclass>pts.model.network.properties.SnmpPropertyDefinition</j.0:javaclass>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#location">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Network">
+    <j.0:javaclass>pts.model.network.Network</j.0:javaclass>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#properties">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface">
+    <j.0:javaclass>pts.model.network.transport.Interface</j.0:javaclass>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1022">
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth0</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1022</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Device/1037">
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1019"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1018"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1017"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HostB03</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1037</j.1:id>
+    <j.1:host rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.1:host>
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1038"/>
+    <j.1:location rdf:resource="http://jscc.ru/pts#Location/1020"/>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Device"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#SnmpPropertyDefinition/1018">
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">snmp interfaces</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1018</j.1:id>
+    <j.1:snmpPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">interfaces_path1</j.1:snmpPath>
+    <rdf:type rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Location/1020">
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Moscow</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1020</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Location"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Network/1039">
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1039</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Network"/>
+    <j.1:networkElements rdf:resource="http://jscc.ru/pts#Device/1037"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LAN01</j.1:name>
+    <j.1:networkElements rdf:resource="http://jscc.ru/pts#Device/1028"/>
+    <j.1:networkElements rdf:resource="http://jscc.ru/pts#Device/1033"/>
+    <j.1:networkElements rdf:resource="http://jscc.ru/pts#Device/1024"/>
+    <j.1:networkElements rdf:resource="http://jscc.ru/pts#Device/1030"/>
+    <j.1:networkElements rdf:resource="http://jscc.ru/pts#Device/1035"/>
+    <j.1:networkElements rdf:resource="http://jscc.ru/pts#Device/1026"/>
+    <j.1:networkElements rdf:resource="http://jscc.ru/pts#Device/1021"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#name">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Device/1033">
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1019"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1018"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1017"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HostB01</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1033</j.1:id>
+    <j.1:host rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.1:host>
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1034"/>
+    <j.1:location rdf:resource="http://jscc.ru/pts#Location/1020"/>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Device"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://thewebsemantic.com/javaclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Device/1035">
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1019"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1018"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1017"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HostB02</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1035</j.1:id>
+    <j.1:host rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.1:host>
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1036"/>
+    <j.1:location rdf:resource="http://jscc.ru/pts#Location/1020"/>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Device"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#snmpPath">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#networkElements">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1029">
+    <j.1:connectedTo rdf:resource="http://jscc.ru/pts#Interface/1022"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth0</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1029</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Device">
+    <j.0:javaclass>pts.model.network.Device</j.0:javaclass>
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1031">
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth0</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1031</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Device/1028">
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1019"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1018"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1017"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HostA03</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1028</j.1:id>
+    <j.1:host rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.1:host>
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1029"/>
+    <j.1:location rdf:resource="http://jscc.ru/pts#Location/1020"/>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Device"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1032">
+    <j.1:connectedTo rdf:resource="http://jscc.ru/pts#Interface/1023"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth1</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1032</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#SnmpPropertyDefinition/1019">
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">snmp packet loss</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1019</j.1:id>
+    <j.1:snmpPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">packet_loss_path1</j.1:snmpPath>
+    <rdf:type rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#SnmpPropertyDefinition/1017">
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">snmp uptime</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1017</j.1:id>
+    <j.1:snmpPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">uptime_path1</j.1:snmpPath>
+    <rdf:type rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1023">
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth1</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1023</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#host">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1027">
+    <j.1:connectedTo rdf:resource="http://jscc.ru/pts#Interface/1022"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth0</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1027</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#id">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Device/1021">
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1019"/>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Device"/>
+    <j.1:host rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</j.1:host>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1017"/>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1021</j.1:id>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RouterA</j.1:name>
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1022"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1018"/>
+    <j.1:location rdf:resource="http://jscc.ru/pts#Location/1020"/>
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1023"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Device/1024">
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1019"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1018"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1017"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HostA01</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1024</j.1:id>
+    <j.1:host rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.1:host>
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1025"/>
+    <j.1:location rdf:resource="http://jscc.ru/pts#Location/1020"/>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Device"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#mib">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Interface/1025">
+    <j.1:connectedTo rdf:resource="http://jscc.ru/pts#Interface/1022"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">eth0</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1025</j.1:id>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Interface"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://jscc.ru/pts#Device/1026">
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1019"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1018"/>
+    <j.1:properties rdf:resource="http://jscc.ru/pts#SnmpPropertyDefinition/1017"/>
+    <j.1:name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">HostA02</j.1:name>
+    <j.1:id rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1026</j.1:id>
+    <j.1:host rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.1:host>
+    <j.1:interfaces rdf:resource="http://jscc.ru/pts#Interface/1027"/>
+    <j.1:location rdf:resource="http://jscc.ru/pts#Location/1020"/>
+    <rdf:type rdf:resource="http://jscc.ru/pts#Device"/>
+  </rdf:Description>
+</rdf:RDF>
+

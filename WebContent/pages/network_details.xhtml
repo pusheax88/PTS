@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ez="http://java.sun.com/jsf/composite/navi"
+      xmlns:rs="http://java.sun.com/jsf/composite/select">
+
+	<ui:composition template="/templates/common.xhtml">
+		<ui:define name="pageTitle">Network Details</ui:define>
+		<ui:define name="headerLinks">
+			<table>
+				<tr>
+					<td>
+						<h:form>
+							<h:commandLink value="#{msg_networks.save_as_diagram}" action="#{networkDetailsPage.saveAsDiagramAction}">
+								<f:param name="networkID" value="#{networkDetailsPage.networkID}" />
+							</h:commandLink>
+						</h:form>
+					</td>
+				</tr>
+			</table>
+		</ui:define>
+		<ui:define name="pageBody">
+				<h:form>
+					<h3>#{msg_networks.h_network_elements} #{networkDetailsPage.network.name}</h3>
+			    	<h:dataTable class="generic" value="#{networkDetailsPage.networkElements}" var="elem">
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_networks.network_elem_id}" />
+			    			</f:facet>
+			    			<h:outputLink value="#{request.contextPath}/pages/network_elem_details.jsf">
+				    			<h:outputText value="#{elem.id}" />
+				    			<f:param name="networkElementID" value="#{elem.id}"/>
+			    			</h:outputLink>
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_networks.network_elem_name}" />
+			    			</f:facet>
+			    			<h:outputText value="#{elem.name}" />
+			    		</h:column>
+			    		<h:column>
+			    			<f:facet name="header">
+			    				<h:outputText value="#{msg_networks.network_elem_type}" />
+			    			</f:facet>
+			    			<h:outputText value="#{elem.elementType}" />
+			    		</h:column>
+			    	</h:dataTable>
+		    	</h:form>
+		</ui:define>
+	</ui:composition>
+</html>
